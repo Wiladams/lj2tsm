@@ -217,6 +217,8 @@ int tsm_screen_selection_copy(struct tsm_screen *con, char **out);
 ]]
 
 -- Drawing the screen
+-- Hand this a callback function and it will call that with sequences
+-- of characters and their attributes, which are to be drawn.
 ffi.cdef[[
 tsm_age_t tsm_screen_draw(struct tsm_screen *con, tsm_screen_draw_cb draw_cb,
 			  void *data);

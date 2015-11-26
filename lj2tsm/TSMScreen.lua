@@ -116,30 +116,30 @@ function TSMScreen.writeSymbol(self, ch, attr)
 		attr.fb = 255;
 	end
 
-	ch = ch or 0
-	if type(ch) == "string" then
-		ch = string.byte(ch)
-	end
 	tsm.tsm_screen_write(self.Handle, ch, attr);
 
 	return self;
 end
 
-function TSMScreen.draw(self, draw_cb)	
+-- As a convenience, draw a string by calling writeSybol
+-- for each character in the string
+function TSMScreen.writeString(self, str)
+	for i=1,#str do
+		self:writeSymbol(string.byte(str:sub(i)))
+	end
 
+	return self;
+end
+
+
+function TSMScreen.draw(self, draw_cb)	
 	local res = tsm.tsm_screen_draw(self.Handle, draw_cb, nil);
 
 	return self;
 end
 
 
-function TSMScreen.writeString(self, str)
-	for i=1,#str do
-		self:writeSymbol(str:sub(i))
-	end
 
-	return self;
-end
 
 
 --[[
