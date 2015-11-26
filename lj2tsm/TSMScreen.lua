@@ -109,23 +109,38 @@ end
 --[[
 	Writing to the screen
 --]]
-function TSMScreen.writeSymbol(self, symbol, attr)
-	local ch = symbol
-	if type(symbol) == "string" then
-		ch = string.byte(symbol)
+function TSMScreen.writeSymbol(self, ch, attr)
+	if not attr then
+		attr = tsm["struct tsm_screen_attr"]()
+		attr.fccode = -1;
+		attr.fb = 255;
 	end
 
+	ch = ch or 0
+	if type(ch) == "string" then
+		ch = string.byte(ch)
+	end
 	tsm.tsm_screen_write(self.Handle, ch, attr);
 
 	return self;
 end
 
 function TSMScreen.draw(self, draw_cb)	
-	
+
 	local res = tsm.tsm_screen_draw(self.Handle, draw_cb, nil);
 
 	return self;
 end
+
+
+function TSMScreen.writeString(self, str)
+	for i=1,#str do
+		self:writeSymbol(str:sub(i))
+	end
+
+	return self;
+end
+
 
 --[[
 up
