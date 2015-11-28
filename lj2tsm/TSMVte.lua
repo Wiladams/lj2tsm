@@ -80,7 +80,10 @@ function TSMVte.input(self, buff, len)
 	return self;
 end
 
-function TSMVte.handleKeyboard(self)
+function TSMVte.handleKeyboard(self, keysym, ascii, mods, unicode)
+	local res = tsm.tsm_vte_handle_keyboard(self.Handle, keysym, ascii, mods, unicode);
+
+	return res == 1
 end
 
 

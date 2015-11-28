@@ -19,5 +19,5 @@ local function drawScreen(screen, id, ch, len, width, posx, posy, attr, age, dat
 end
 jit.off(drawScreen)
 
-vte:input("Hello World!")
+vte:input("Hello My World!")
 vte.Screen:draw(drawScreen)
